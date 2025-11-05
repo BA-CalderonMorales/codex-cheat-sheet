@@ -1,6 +1,6 @@
 <div align="center">
 
-# Codex Cheat Sheet
+# Codex Cheat Sheet (Beta)
 
 > **Your complete guide to mastering OpenAI Codex - from zero to hero in minutes!**
 
