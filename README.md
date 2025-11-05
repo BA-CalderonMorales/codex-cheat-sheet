@@ -1,3 +1,5 @@
+<div align="center">
+
 # Codex Cheat Sheet
 
 > **Your complete guide to mastering OpenAI Codex - from zero to hero in minutes!**
@@ -5,6 +7,8 @@
 Ultimate collection of Codex tips, tricks, hacks, and workflows that you can use to master Codex CLI without having to remember every command.
 
 **Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
+
+</div>
 
 ## Quick Start
 
@@ -32,8 +36,6 @@ codex --version
 - **[Level 5: Expert Workflows](#level-5-expert-workflows)**
 - **[Command Reference](#command-reference)**
 - **[Best Practices](#best-practices)**
-
----
 
 ## Level 1: Getting Started
 
@@ -109,8 +111,6 @@ Esc Esc                   # Edit previous message
 ```
 
 </details>
-
----
 
 ## Level 2: Basic Commands
 
@@ -224,8 +224,6 @@ codex completion fish                 # Generate fish completions
 
 </details>
 
----
-
 ## Level 3: Intermediate Usage
 
 Configuration and customization options.
@@ -308,8 +306,6 @@ Coding standards:
 ```
 
 </details>
-
----
 
 ## Level 4: Advanced Features
 
@@ -455,8 +451,6 @@ See [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) 
 
 </details>
 
----
-
 ## Level 5: Expert Workflows
 
 Advanced patterns and automation.
@@ -557,8 +551,6 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 
 </details>
 
----
-
 ## Command Reference
 
 ### CLI Commands
@@ -607,8 +599,6 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 | `Esc Esc` | Edit previous message (backtrack mode) |
 | `@` | Trigger fuzzy file search |
 | `Ctrl+V` / `Cmd+V` | Paste images into composer |
-
----
 
 ## Best Practices
 
@@ -681,8 +671,6 @@ project/
 
 </details>
 
----
-
 ## Common Use Cases
 
 <details>
@@ -753,8 +741,6 @@ codex "Refactor this code to:
 
 </details>
 
----
-
 ## Additional Resources
 
 **Official OpenAI Codex Documentation:**
@@ -781,8 +767,6 @@ codex "Refactor this code to:
 
 > **Tip**: Always check the [official Codex documentation](https://github.com/openai/codex) for the latest features and updates. This cheat sheet is a quick reference, but the official docs contain the most comprehensive and up-to-date information.
 
----
-
 ## Contributing
 
 Found an issue or have a suggestion? Contributions are welcome!
@@ -792,21 +776,15 @@ Found an issue or have a suggestion? Contributions are welcome!
 - Improve documentation
 - Share your workflows
 
----
-
 ## License
 
 This cheat sheet is provided under the MIT License.
-
----
 
 ## Credits and Inspiration
 
 This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https://github.com/Njengah/claude-code-cheat-sheet) by @Njengah. We adapted their progressive learning structure to create a similar quick reference guide for OpenAI Codex CLI.
 
 All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
-
----
 
 **Last updated**: November 2025  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
