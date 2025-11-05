@@ -2,6 +2,8 @@
 
 # Codex Cheat Sheet (Beta)
 
+<img width="3840" height="1317" alt="image" src="https://github.com/user-attachments/assets/0749d33a-de10-4f1e-8ae7-492d61dc37a0" />
+
 > **Your complete guide to mastering OpenAI Codex - from zero to hero in minutes!**
 
 Ultimate collection of Codex tips, tricks, hacks, and workflows that you can use to master Codex CLI without having to remember every command.
