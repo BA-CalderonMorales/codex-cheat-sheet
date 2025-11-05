@@ -4,6 +4,8 @@
 
 Ultimate collection of Codex tips, tricks, hacks, and workflows that you can use to master Codex CLI without having to remember every command.
 
+**📖 Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
+
 ## 🚀 Quick Start
 
 ```bash
@@ -42,7 +44,7 @@ Essential commands to get you started with Codex.
 # Install globally with npm
 npm install -g @openai/codex
 
-# Install with Homebrew
+# Install with Homebrew (macOS)
 brew install --cask codex
 
 # Update with npm
@@ -50,6 +52,9 @@ npm update -g @openai/codex
 
 # Update with Homebrew
 brew upgrade codex
+
+# Download binary from GitHub releases
+# Visit: https://github.com/openai/codex/releases/latest
 ```
 
 ### First Steps
@@ -61,11 +66,8 @@ codex
 # Run with a specific prompt
 codex "explain this project"
 
-# Check installation health
-codex /doctor
-
-# View help
-codex /help
+# Non-interactive execution
+codex exec "explain utils.ts"
 ```
 
 ### Authentication
@@ -75,18 +77,24 @@ codex /help
 codex
 # Then select "Sign in with ChatGPT"
 
-# Use API key (alternative)
-# Set OPENAI_API_KEY environment variable
-export OPENAI_API_KEY="your-api-key"
+# Use API key (alternative - usage-based billing)
+printenv OPENAI_API_KEY | codex login --with-api-key
+# Or from a file:
+codex login --with-api-key < my_key.txt
 ```
 
 ### Basic Navigation
 
 ```bash
-/help                     # Show all available commands
-/exit                     # Exit Codex
+# Keyboard shortcuts
 Ctrl+C                    # Cancel current operation
 Ctrl+D                    # Exit Codex
+Tab                       # Auto-complete
+↑/↓                       # Command history
+Esc Esc                   # Edit previous message
+
+# Special input
+@                         # Trigger file search (fuzzy find)
 ```
 
 ---
@@ -98,11 +106,21 @@ Core commands for everyday use.
 ### Slash Commands - Essentials
 
 ```bash
-/help                     # Show available slash commands
-/clear                    # Clear conversation history
-/exit                     # Exit the REPL
-/config                   # Open configuration panel
-/doctor                   # Check system health
+/model                    # Choose model and reasoning effort
+/approvals                # Configure what Codex can do without approval
+/review                   # Review current changes and find issues
+/new                      # Start a new chat during conversation
+/init                     # Create an AGENTS.md file with instructions
+/compact                  # Summarize conversation to prevent context limit
+/undo                     # Ask Codex to undo a turn
+/diff                     # Show git diff (including untracked files)
+/mention                  # Mention a file
+/status                   # Show current session config and token usage
+/mcp                      # List configured MCP tools
+/logout                   # Log out of Codex
+/quit                     # Exit Codex
+/exit                     # Exit Codex
+/feedback                 # Send logs to maintainers
 ```
 
 ### File and Directory Operations
@@ -135,12 +153,47 @@ Core commands for everyday use.
 ### Session Management
 
 ```bash
-# Continue working on previous task
-codex --continue
-codex -c
+# Resume sessions
+codex resume                          # Open session picker
+codex resume --last                   # Resume most recent session
+codex resume <SESSION_ID>             # Resume specific session by ID
 
-# View conversation history
-# Codex maintains context within a session
+# Non-interactive session resume
+codex exec resume <SESSION_ID>        # Resume non-interactive session
+codex exec resume --last              # Resume last non-interactive session
+```
+
+### Useful CLI Flags
+
+```bash
+# Model selection
+codex --model gpt-5 "your prompt"
+codex -m o3 "complex task"
+
+# Working directory
+codex --cd /path/to/project           # Change working directory
+codex -C ../other-project             # Short form
+
+# Multiple directories
+codex --add-dir ../backend --add-dir ../shared "analyze all"
+
+# Approval settings
+codex --ask-for-approval untrusted    # Ask for untrusted commands
+codex -a on-failure                   # Ask on command failure
+
+# Sandbox settings
+codex --sandbox read-only             # Read-only sandbox (default)
+codex --sandbox workspace-write       # Allow workspace writes
+codex --sandbox danger-full-access    # Disable sandbox (dangerous!)
+
+# Image input
+codex -i screenshot.png "explain this error"
+codex --image img1.png,img2.jpg "summarize these diagrams"
+
+# Shell completions
+codex completion bash                 # Generate bash completions
+codex completion zsh                  # Generate zsh completions
+codex completion fish                 # Generate fish completions
 ```
 
 ---
@@ -154,28 +207,36 @@ Configuration and customization options.
 ```bash
 # Config file location: ~/.codex/config.toml
 
-# Open config file
-codex /config
+# Edit config manually or use CLI flags
+codex --model gpt-5 "your prompt"
+codex --config model="gpt-5"
 
-# Common configurations:
-# - Default model
-# - MCP servers
-# - Custom prompts
-# - Sandbox settings
+# Common configurations in config.toml:
+# - model selection
+# - approval_policy
+# - sandbox_mode
+# - mcp_servers
+# - profiles
 ```
 
 ### Model Selection
 
 ```bash
-# Use specific model in config.toml
-[model]
-name = "gpt-4o"           # Default model
-temperature = 0.7         # Creativity level (0.0-1.0)
+# Set model in config.toml
+model = "gpt-5"                    # Default model
+
+# For reasoning models (o3, o4-mini, gpt-5, gpt-5-codex):
+model_reasoning_effort = "medium"  # minimal, low, medium, high
+model_reasoning_summary = "auto"   # auto, concise, detailed, none
+
+# For GPT-5 family models:
+model_verbosity = "medium"         # low, medium, high
 
 # Models available:
-# - gpt-4o (recommended)
-# - gpt-4
-# - gpt-3.5-turbo
+# - gpt-5-codex (default on macOS/Linux)
+# - gpt-5 (default on Windows)
+# - o3, o4-mini (reasoning models)
+# - Other OpenAI models via custom providers
 ```
 
 ### Custom Prompts
@@ -219,35 +280,53 @@ Powerful features for advanced workflows.
 ```bash
 # Configure MCP servers in ~/.codex/config.toml
 
-[[mcp_servers.filesystem]]
+# STDIO server example
+[mcp_servers.filesystem]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allowed/files"]
+env = { API_KEY = "value" }
 
-[[mcp_servers.github]]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-github"]
-env = { GITHUB_TOKEN = "your-token" }
+# Streamable HTTP server example
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+bearer_token_env_var = "FIGMA_TOKEN"
 
-# MCP enables:
-# - Filesystem access beyond current directory
-# - Database connections
-# - API integrations
-# - Custom tool creation
+# MCP CLI commands
+codex mcp list                        # List configured servers
+codex mcp add <name> -- <command>     # Add a server
+codex mcp get <name>                  # Show server details
+codex mcp remove <name>               # Remove a server
+codex mcp login <name>                # OAuth login (streamable HTTP)
+codex mcp logout <name>               # OAuth logout
+
+# Popular MCP servers:
+# - Context7 (developer documentation)
+# - Figma (design access)
+# - Playwright (browser control)
+# - GitHub (GitHub API access)
+# - Sentry (log access)
 ```
 
 ### Sandbox & Permissions
 
 ```bash
-# Codex runs in a sandbox by default
-# You can approve/deny tool usage:
-# - Bash commands
-# - File operations
-# - Network requests
+# Configure sandbox mode in config.toml
+sandbox_mode = "read-only"              # Default: read-only
+sandbox_mode = "workspace-write"        # Allow writes in workspace
+sandbox_mode = "danger-full-access"     # Disable sandbox (dangerous!)
 
-# Configure in config.toml:
-[sandbox]
-auto_approve = ["bash:ls", "bash:cat", "bash:grep"]
-auto_deny = ["bash:rm", "bash:sudo"]
+# Configure approval policy
+approval_policy = "untrusted"           # Prompt for untrusted commands
+approval_policy = "on-failure"          # Prompt on command failure
+approval_policy = "on-request"          # Model decides when to ask
+approval_policy = "never"               # Never prompt (exec default)
+
+# Workspace-write options
+[sandbox_workspace_write]
+writable_roots = ["/path/to/extra/dir"]
+network_access = false
+exclude_tmpdir_env_var = false
+exclude_slash_tmp = false
 ```
 
 ### Non-Interactive Mode
@@ -256,10 +335,20 @@ auto_deny = ["bash:rm", "bash:sudo"]
 # Execute and exit with codex exec
 codex exec "summarize all TODO comments in this project"
 
-# Useful for:
-# - CI/CD pipelines
-# - Automation scripts
-# - Batch processing
+# Allow file edits
+codex exec --full-auto "refactor this code"
+
+# Full access (dangerous!)
+codex exec --sandbox danger-full-access "your task"
+
+# JSON output for automation
+codex exec --json "analyze this project"
+
+# Structured output with JSON schema
+codex exec --output-schema schema.json "extract project details"
+
+# Save output to file
+codex exec -o output.txt "generate docs"
 ```
 
 ### Piping and Scripting
@@ -349,13 +438,13 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 ### Zero Data Retention (ZDR)
 
 ```bash
-# Enable ZDR for sensitive projects
-# In config.toml:
-[privacy]
-zero_data_retention = true
+# ZDR is available for Enterprise customers
+# Data is not used for training
+# API requests not logged beyond 30 days
+# Configure via your OpenAI Enterprise account settings
 
-# For Enterprise users - data not used for training
-# Requests not logged beyond 30 days
+# For more info:
+# See: https://github.com/openai/codex/blob/main/docs/zdr.md
 ```
 
 ---
@@ -366,21 +455,36 @@ zero_data_retention = true
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `codex` | Start interactive REPL | `codex` |
+| `codex` | Start interactive TUI | `codex` |
 | `codex "prompt"` | Start with initial prompt | `codex "explain this"` |
-| `codex exec "prompt"` | Non-interactive execution | `codex exec "analyze code"` |
-| `codex --continue` | Continue last session | `codex -c` |
+| `codex exec "..."` | Non-interactive execution | `codex exec "analyze code"` |
+| `codex resume` | Resume session (picker) | `codex resume` |
+| `codex resume --last` | Resume most recent session | `codex resume --last` |
+| `codex resume <ID>` | Resume specific session | `codex resume abc-123` |
 | `codex --version` | Show version | `codex --version` |
+| `codex --model <model>` | Use specific model | `codex --model gpt-5` |
+| `codex --cd <dir>` | Set working directory | `codex --cd /path/to/project` |
+| `codex --add-dir <dir>` | Add extra writable directory | `codex --add-dir ../backend` |
 
 ### Slash Commands
 
 | Command | Description |
 |---------|-------------|
-| `/help` | Show available commands |
+| `/model` | Choose model and reasoning effort |
+| `/approvals` | Configure approval settings |
+| `/review` | Review current changes and find issues |
+| `/new` | Start a new chat during conversation |
+| `/init` | Create AGENTS.md file with instructions |
+| `/compact` | Summarize conversation to prevent context limit |
+| `/undo` | Ask Codex to undo a turn |
+| `/diff` | Show git diff (including untracked files) |
+| `/mention` | Mention a file |
+| `/status` | Show session config and token usage |
+| `/mcp` | List configured MCP tools |
+| `/logout` | Log out of Codex |
+| `/quit` | Exit Codex |
 | `/exit` | Exit Codex |
-| `/clear` | Clear conversation history |
-| `/config` | Open configuration |
-| `/doctor` | Check system health |
+| `/feedback` | Send logs to maintainers |
 
 ### Keyboard Shortcuts
 
@@ -390,6 +494,9 @@ zero_data_retention = true
 | `Ctrl+D` | Exit Codex |
 | `Tab` | Auto-complete |
 | `↑/↓` | Command history |
+| `Esc Esc` | Edit previous message (backtrack mode) |
+| `@` | Trigger fuzzy file search |
+| `Ctrl+V` / `Cmd+V` | Paste images into composer |
 
 ---
 
@@ -413,18 +520,21 @@ zero_data_retention = true
 ### Security Tips
 
 - Always review bash commands before approval
-- Use sandbox auto_deny for dangerous commands
-- Enable ZDR for sensitive projects
-- Use API keys only when necessary
-- Keep Codex updated
+- Use `approval_policy = "untrusted"` to be prompted for risky commands
+- Use `sandbox_mode = "read-only"` for analysis tasks
+- Use `sandbox_mode = "workspace-write"` to limit writes to project directory
+- Avoid `sandbox_mode = "danger-full-access"` unless in controlled environment
+- Enable ZDR for Enterprise customers with sensitive projects
+- Keep Codex updated for latest security features
 
 ### Performance Tips
 
-- Use `/clear` to reset context when switching tasks
-- Create specific custom prompts for repeated tasks
-- Use AGENTS.md to reduce repeated context
-- Configure MCP servers for better access
-- Use `codex exec` for automation
+- Use `/compact` to summarize long conversations and free up context
+- Use `/new` to start fresh chat within same session
+- Create AGENTS.md files to provide project context once
+- Use `codex exec` for automated, non-interactive workflows
+- Configure MCP servers for extended capabilities
+- Use profiles for different project types
 
 ### Project Organization
 
@@ -507,14 +617,29 @@ codex "Refactor this code to:
 
 ## 📚 Additional Resources
 
-- [Official Documentation](https://github.com/openai/codex)
-- [Getting Started Guide](https://github.com/openai/codex/blob/main/docs/getting-started.md)
-- [Configuration Docs](https://github.com/openai/codex/blob/main/docs/config.md)
-- [Slash Commands](https://github.com/openai/codex/blob/main/docs/slash_commands.md)
-- [MCP Documentation](https://github.com/openai/codex/blob/main/docs/advanced.md#model-context-protocol-mcp)
-- [GitHub Action](https://github.com/openai/codex-action)
-- [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript)
-- [FAQ](https://github.com/openai/codex/blob/main/docs/faq.md)
+**Official OpenAI Codex Documentation:**
+- [Official Repository](https://github.com/openai/codex) - Main repository and documentation hub
+- [Getting Started Guide](https://github.com/openai/codex/blob/main/docs/getting-started.md) - Comprehensive getting started guide
+- [Configuration Reference](https://github.com/openai/codex/blob/main/docs/config.md) - Complete config.toml reference
+- [Slash Commands](https://github.com/openai/codex/blob/main/docs/slash_commands.md) - All slash commands explained
+- [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs/exec.md) - Automation with codex exec
+- [Authentication](https://github.com/openai/codex/blob/main/docs/authentication.md) - Authentication methods
+- [Sandbox & Approvals](https://github.com/openai/codex/blob/main/docs/sandbox.md) - Security and sandboxing
+- [AGENTS.md Documentation](https://github.com/openai/codex/blob/main/docs/agents_md.md) - Project instructions guide
+- [MCP Integration](https://github.com/openai/codex/blob/main/docs/advanced.md#model-context-protocol-mcp) - MCP setup and usage
+- [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) - Creating custom prompts
+- [FAQ](https://github.com/openai/codex/blob/main/docs/faq.md) - Frequently asked questions
+
+**Extensions & Integrations:**
+- [GitHub Action](https://github.com/openai/codex-action) - CI/CD integration
+- [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript) - Programmatic usage
+- [VS Code Extension](https://developers.openai.com/codex/ide) - IDE integration
+
+**Model Context Protocol:**
+- [MCP Specification](https://modelcontextprotocol.io/) - Official MCP protocol docs
+- [MCP Server Examples](https://github.com/modelcontextprotocol/servers) - Community MCP servers
+
+> 💡 **Tip**: Always check the [official Codex documentation](https://github.com/openai/codex) for the latest features and updates. This cheat sheet is a quick reference, but the official docs contain the most comprehensive and up-to-date information.
 
 ---
 
