@@ -4,9 +4,9 @@
 
 Ultimate collection of Codex tips, tricks, hacks, and workflows that you can use to master Codex CLI without having to remember every command.
 
-**📖 Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
+**Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install with npm
@@ -22,23 +22,24 @@ codex
 codex --version
 ```
 
-## 📚 Table of Contents
+## Table of Contents
 
-- 🟢 **[Level 1: Getting Started](#-level-1-getting-started)**
-- 🟡 **[Level 2: Basic Commands](#-level-2-basic-commands)**
-- 🟠 **[Level 3: Intermediate Usage](#-level-3-intermediate-usage)**
-- 🔴 **[Level 4: Advanced Features](#-level-4-advanced-features)**
-- 🔵 **[Level 5: Expert Workflows](#-level-5-expert-workflows)**
-- 📖 **[Command Reference](#-command-reference)**
-- 💡 **[Best Practices](#-best-practices)**
+- **[Level 1: Getting Started](#level-1-getting-started)**
+- **[Level 2: Basic Commands](#level-2-basic-commands)**
+- **[Level 3: Intermediate Usage](#level-3-intermediate-usage)**
+- **[Level 4: Advanced Features](#level-4-advanced-features)**
+- **[Level 5: Expert Workflows](#level-5-expert-workflows)**
+- **[Command Reference](#command-reference)**
+- **[Best Practices](#best-practices)**
 
 ---
 
-## 🟢 Level 1: Getting Started
+## Level 1: Getting Started
 
 Essential commands to get you started with Codex.
 
-### Installation
+<details>
+<summary><strong>Installation</strong></summary>
 
 ```bash
 # Install globally with npm
@@ -57,7 +58,10 @@ brew upgrade codex
 # Visit: https://github.com/openai/codex/releases/latest
 ```
 
-### First Steps
+</details>
+
+<details>
+<summary><strong>First Steps</strong></summary>
 
 ```bash
 # Start interactive mode
@@ -70,7 +74,10 @@ codex "explain this project"
 codex exec "explain utils.ts"
 ```
 
-### Authentication
+</details>
+
+<details>
+<summary><strong>Authentication</strong></summary>
 
 ```bash
 # Sign in with ChatGPT account (recommended)
@@ -83,7 +90,10 @@ printenv OPENAI_API_KEY | codex login --with-api-key
 codex login --with-api-key < my_key.txt
 ```
 
-### Basic Navigation
+</details>
+
+<details>
+<summary><strong>Basic Navigation</strong></summary>
 
 ```bash
 # Keyboard shortcuts
@@ -97,13 +107,16 @@ Esc Esc                   # Edit previous message
 @                         # Trigger file search (fuzzy find)
 ```
 
+</details>
+
 ---
 
-## 🟡 Level 2: Basic Commands
+## Level 2: Basic Commands
 
 Core commands for everyday use.
 
-### Slash Commands - Essentials
+<details>
+<summary><strong>Slash Commands - Essentials</strong></summary>
 
 ```bash
 /model                    # Choose model and reasoning effort
@@ -123,7 +136,10 @@ Core commands for everyday use.
 /feedback                 # Send logs to maintainers
 ```
 
-### File and Directory Operations
+</details>
+
+<details>
+<summary><strong>File and Directory Operations</strong></summary>
 
 ```bash
 # Codex can read, write, and edit files
@@ -136,7 +152,10 @@ Core commands for everyday use.
 "What files are in the src directory?"
 ```
 
-### Working with Code
+</details>
+
+<details>
+<summary><strong>Working with Code</strong></summary>
 
 ```bash
 # Code analysis
@@ -150,7 +169,10 @@ Core commands for everyday use.
 "Add error handling to this code"
 ```
 
-### Session Management
+</details>
+
+<details>
+<summary><strong>Session Management</strong></summary>
 
 ```bash
 # Resume sessions
@@ -163,7 +185,10 @@ codex exec resume <SESSION_ID>        # Resume non-interactive session
 codex exec resume --last              # Resume last non-interactive session
 ```
 
-### Useful CLI Flags
+</details>
+
+<details>
+<summary><strong>Useful CLI Flags</strong></summary>
 
 ```bash
 # Model selection
@@ -196,13 +221,16 @@ codex completion zsh                  # Generate zsh completions
 codex completion fish                 # Generate fish completions
 ```
 
+</details>
+
 ---
 
-## 🟠 Level 3: Intermediate Usage
+## Level 3: Intermediate Usage
 
 Configuration and customization options.
 
-### Configuration
+<details>
+<summary><strong>Configuration</strong></summary>
 
 ```bash
 # Config file location: ~/.codex/config.toml
@@ -219,7 +247,10 @@ codex --config model="gpt-5"
 # - profiles
 ```
 
-### Model Selection
+</details>
+
+<details>
+<summary><strong>Model Selection</strong></summary>
 
 ```bash
 # Set model in config.toml
@@ -239,7 +270,10 @@ model_verbosity = "medium"         # low, medium, high
 # - Other OpenAI models via custom providers
 ```
 
-### Custom Prompts
+</details>
+
+<details>
+<summary><strong>Custom Prompts</strong></summary>
 
 ```bash
 # Create custom prompts in ~/.codex/prompts/
@@ -249,7 +283,10 @@ model_verbosity = "medium"         # low, medium, high
 "Use the review prompt on this code"
 ```
 
-### Memory with AGENTS.md
+</details>
+
+<details>
+<summary><strong>Memory with AGENTS.md</strong></summary>
 
 ```bash
 # Create AGENTS.md in project root
@@ -269,13 +306,16 @@ Coding standards:
 """
 ```
 
+</details>
+
 ---
 
-## 🔴 Level 4: Advanced Features
+## Level 4: Advanced Features
 
 Powerful features for advanced workflows.
 
-### Model Context Protocol (MCP)
+<details>
+<summary><strong>Model Context Protocol (MCP)</strong></summary>
 
 ```bash
 # Configure MCP servers in ~/.codex/config.toml
@@ -307,7 +347,12 @@ codex mcp logout <name>               # OAuth logout
 # - Sentry (log access)
 ```
 
-### Sandbox & Permissions
+See [MCP Documentation](https://github.com/openai/codex/blob/main/docs/config.md#mcp-integration) for details.
+
+</details>
+
+<details>
+<summary><strong>Sandbox & Permissions</strong></summary>
 
 ```bash
 # Configure sandbox mode in config.toml
@@ -329,7 +374,12 @@ exclude_tmpdir_env_var = false
 exclude_slash_tmp = false
 ```
 
-### Non-Interactive Mode
+See [Sandbox & Approvals](https://github.com/openai/codex/blob/main/docs/sandbox.md) for details.
+
+</details>
+
+<details>
+<summary><strong>Non-Interactive Mode</strong></summary>
 
 ```bash
 # Execute and exit with codex exec
@@ -351,7 +401,12 @@ codex exec --output-schema schema.json "extract project details"
 codex exec -o output.txt "generate docs"
 ```
 
-### Piping and Scripting
+See [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs/exec.md) for details.
+
+</details>
+
+<details>
+<summary><strong>Piping and Scripting</strong></summary>
 
 ```bash
 # Pipe content to Codex
@@ -364,13 +419,16 @@ git diff | codex exec "create a commit message"
 codex exec "explain this file" < app.js > explanation.md
 ```
 
+</details>
+
 ---
 
-## 🔵 Level 5: Expert Workflows
+## Level 5: Expert Workflows
 
 Advanced patterns and automation.
 
-### GitHub Actions Integration
+<details>
+<summary><strong>GitHub Actions Integration</strong></summary>
 
 ```yaml
 # Use codex-action for CI/CD
@@ -385,7 +443,12 @@ jobs:
           task: "Review this PR for security issues"
 ```
 
-### TypeScript SDK
+See [GitHub Action](https://github.com/openai/codex-action) for details.
+
+</details>
+
+<details>
+<summary><strong>TypeScript SDK</strong></summary>
 
 ```typescript
 // Programmatic Codex usage
@@ -403,7 +466,12 @@ const response = await codex.exec({
 console.log(response.output);
 ```
 
-### Automated Workflows
+See [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript) for details.
+
+</details>
+
+<details>
+<summary><strong>Automated Workflows</strong></summary>
 
 ```bash
 # Code review automation
@@ -420,7 +488,10 @@ codex exec "create tests for all functions in src/" > tests/
 git log --oneline v1.0..HEAD | codex exec "create release notes" > RELEASE_NOTES.md
 ```
 
-### Complex Prompts
+</details>
+
+<details>
+<summary><strong>Complex Prompts</strong></summary>
 
 ```bash
 # Multi-step tasks
@@ -435,7 +506,10 @@ codex exec "
 codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 ```
 
-### Zero Data Retention (ZDR)
+</details>
+
+<details>
+<summary><strong>Zero Data Retention (ZDR)</strong></summary>
 
 ```bash
 # ZDR is available for Enterprise customers
@@ -447,9 +521,11 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 # See: https://github.com/openai/codex/blob/main/docs/zdr.md
 ```
 
+</details>
+
 ---
 
-## 📖 Command Reference
+## Command Reference
 
 ### CLI Commands
 
@@ -500,24 +576,28 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 
 ---
 
-## 💡 Best Practices
+## Best Practices
 
-### Effective Prompting
+<details>
+<summary><strong>Effective Prompting</strong></summary>
 
-✅ **Do:**
+**Do:**
 - Be specific and clear
 - Break complex tasks into steps
 - Provide context in AGENTS.md
 - Use slash commands for common tasks
 - Review Codex's plan before approval
 
-❌ **Don't:**
+**Don't:**
 - Give vague instructions
 - Skip reviewing bash commands
 - Ignore security warnings
 - Over-rely on auto-approve
 
-### Security Tips
+</details>
+
+<details>
+<summary><strong>Security Tips</strong></summary>
 
 - Always review bash commands before approval
 - Use `approval_policy = "untrusted"` to be prompted for risky commands
@@ -527,7 +607,10 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 - Enable ZDR for Enterprise customers with sensitive projects
 - Keep Codex updated for latest security features
 
-### Performance Tips
+</details>
+
+<details>
+<summary><strong>Performance Tips</strong></summary>
 
 - Use `/compact` to summarize long conversations and free up context
 - Use `/new` to start fresh chat within same session
@@ -536,7 +619,10 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 - Configure MCP servers for extended capabilities
 - Use profiles for different project types
 
-### Project Organization
+</details>
+
+<details>
+<summary><strong>Project Organization</strong></summary>
 
 ```bash
 # Recommended structure
@@ -548,7 +634,10 @@ project/
 └── docs/                 # Documentation
 ```
 
-### Team Collaboration
+</details>
+
+<details>
+<summary><strong>Team Collaboration</strong></summary>
 
 - Share AGENTS.md in version control
 - Create team-specific custom prompts
@@ -556,11 +645,14 @@ project/
 - Use consistent coding standards
 - Review Codex-generated code together
 
+</details>
+
 ---
 
-## 🎯 Common Use Cases
+## Common Use Cases
 
-### Code Review
+<details>
+<summary><strong>Code Review</strong></summary>
 
 ```bash
 codex "Review this PR for:
@@ -570,7 +662,10 @@ codex "Review this PR for:
 4. Test coverage"
 ```
 
-### Debugging
+</details>
+
+<details>
+<summary><strong>Debugging</strong></summary>
 
 ```bash
 # Analyze error logs
@@ -580,7 +675,10 @@ cat error.log | codex exec "find the root cause"
 codex "Debug why the login function is failing"
 ```
 
-### Documentation
+</details>
+
+<details>
+<summary><strong>Documentation</strong></summary>
 
 ```bash
 # Generate README
@@ -593,7 +691,10 @@ codex exec "Generate API docs from JSDoc comments"
 codex "Add detailed comments to this complex function"
 ```
 
-### Testing
+</details>
+
+<details>
+<summary><strong>Testing</strong></summary>
 
 ```bash
 # Generate tests
@@ -603,7 +704,10 @@ codex "Create unit tests for all functions in utils.js"
 codex "Analyze test coverage and suggest missing tests"
 ```
 
-### Refactoring
+</details>
+
+<details>
+<summary><strong>Refactoring</strong></summary>
 
 ```bash
 codex "Refactor this code to:
@@ -613,9 +717,11 @@ codex "Refactor this code to:
 4. Add type definitions"
 ```
 
+</details>
+
 ---
 
-## 📚 Additional Resources
+## Additional Resources
 
 **Official OpenAI Codex Documentation:**
 - [Official Repository](https://github.com/openai/codex) - Main repository and documentation hub
@@ -639,11 +745,11 @@ codex "Refactor this code to:
 - [MCP Specification](https://modelcontextprotocol.io/) - Official MCP protocol docs
 - [MCP Server Examples](https://github.com/modelcontextprotocol/servers) - Community MCP servers
 
-> 💡 **Tip**: Always check the [official Codex documentation](https://github.com/openai/codex) for the latest features and updates. This cheat sheet is a quick reference, but the official docs contain the most comprehensive and up-to-date information.
+> **Tip**: Always check the [official Codex documentation](https://github.com/openai/codex) for the latest features and updates. This cheat sheet is a quick reference, but the official docs contain the most comprehensive and up-to-date information.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Found an issue or have a suggestion? Contributions are welcome!
 
@@ -654,19 +760,19 @@ Found an issue or have a suggestion? Contributions are welcome!
 
 ---
 
-## 📄 License
+## License
 
 This cheat sheet is provided under the MIT License.
 
-## ⭐ Support
+---
 
-If this cheat sheet helped you:
-- ⭐ Star this repository
-- 📢 Share with other developers
-- 💬 Provide feedback
-- 🔄 Check for updates
+## Credits and Inspiration
+
+This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https://github.com/Njengah/claude-code-cheat-sheet) by @Njengah. We adapted their progressive learning structure to create a similar quick reference guide for OpenAI Codex CLI.
+
+All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
 
 ---
 
-**Last updated**: November 2025
+**Last updated**: November 2025  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
