@@ -28,6 +28,7 @@ codex --version
 - **[Level 2: Basic Commands](#level-2-basic-commands)**
 - **[Level 3: Intermediate Usage](#level-3-intermediate-usage)**
 - **[Level 4: Advanced Features](#level-4-advanced-features)**
+- **[Skills Integration (Advanced Setup)](#skills-integration-advanced-setup)** - Extensible, repeatable, shareable capabilities
 - **[Level 5: Expert Workflows](#level-5-expert-workflows)**
 - **[Command Reference](#command-reference)**
 - **[Best Practices](#best-practices)**
@@ -418,6 +419,39 @@ git diff | codex exec "create a commit message"
 # Combine commands
 codex exec "explain this file" < app.js > explanation.md
 ```
+
+</details>
+
+<details>
+<summary><strong>Skills Integration (Advanced Setup)</strong></summary>
+
+Skills allow you to create reusable, shareable capabilities that extend Codex's functionality. While Codex doesn't have built-in skills support yet (see [openai/codex#5291](https://github.com/openai/codex/issues/5291)), you can implement custom skills systems.
+
+**Community Solutions:**
+
+The [openskills](https://github.com/numman-ali/openskills) repository provides a framework for creating extensible, repeatable, and shareable skills for Codex. This approach allows you to:
+
+- Define custom workflows and automations
+- Share skills across projects and teams
+- Build libraries of reusable capabilities
+- Take full control of Codex in an extensible way
+
+**Implementation Approaches:**
+
+```bash
+# Using custom prompts directory
+~/.codex/prompts/
+├── code-review.md
+├── refactor-patterns.md
+└── test-generation.md
+
+# Using AGENTS.md for project-specific skills
+# Define standard workflows and patterns in AGENTS.md
+```
+
+**Note:** This is an advanced setup that requires custom integration. Check the [Codex skills discussion](https://github.com/openai/codex/issues/5291) for updates on native skills support. If native skills support has been added since this guide was written, refer to the official documentation for the recommended approach.
+
+See [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) for creating reusable prompt templates.
 
 </details>
 
