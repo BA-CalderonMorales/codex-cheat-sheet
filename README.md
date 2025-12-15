@@ -448,8 +448,12 @@ codex exec "explain this file" < app.js > explanation.md
   ```
 - **Using skills:** Mention with `$<skill-name>` in chat or browse/insert via `/skills` in the TUI. Codex injects only `name`, `description`, and the absolute file path.
 - **Validation behavior:** Invalid frontmatter triggers a dismissible startup modal and log entries; invalid skills are ignored until fixed.
-- **Sample in this repo:** `skills/pdf-processing/SKILL.md` follows the official format. Copy or symlink it to `~/.codex/skills/pdf-processing/SKILL.md`, then restart Codex with the feature flag enabled.
+- **Sample skills in this repo:** Copy or symlink any of the samples below into `~/.codex/skills/<name>/SKILL.md`, then restart Codex with the feature flag enabled:
+  - `skills/pdf-processing/SKILL.md`
+  - `skills/log-review/SKILL.md`
+  - `skills/form-filling/SKILL.md`
 - **Pair with GitHub Skills:** You can combine Codex skills with the learning paths at [github.com/skills](https://github.com/skills) to onboard teams quickly while keeping reusable Codex guidance locally.
+- **Community alternative (pre-native skills):** The [openskills](https://github.com/numman-ali/openskills) project remains a viable open source option if you prefer a community-driven skills system.
 
 </details>
 
