@@ -34,7 +34,7 @@ codex --version
 - **[Level 2: Basic Commands](#level-2-basic-commands)**
 - **[Level 3: Intermediate Usage](#level-3-intermediate-usage)**
 - **[Level 4: Advanced Features](#level-4-advanced-features)**
-- **[Skills Integration (Advanced Setup)](#skills-integration-advanced-setup)** - Extensible, repeatable, shareable capabilities
+- **[Skills (experimental)](#skills-experimental)** - Native, reusable capabilities with feature flag
 - **[Level 5: Expert Workflows](#level-5-expert-workflows)**
 - **[Command Reference](#command-reference)**
 - **[Best Practices](#best-practices)**
@@ -421,35 +421,35 @@ codex exec "explain this file" < app.js > explanation.md
 </details>
 
 <details>
-<summary><strong>Skills Integration (Advanced Setup)</strong></summary>
+<summary><strong>Skills (experimental)</strong></summary>
 
-Skills allow you to create reusable, shareable capabilities that extend Codex's functionality. While Codex doesn't have built-in skills support yet (see [openai/codex#5291](https://github.com/openai/codex/issues/5291)), you can implement custom skills systems.
+<a id="skills-experimental"></a>
 
-**Community Solutions:**
+> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs](https://github.com/openai/codex/blob/main/docs/skills.md) for the latest status.
 
-The [openskills](https://github.com/numman-ali/openskills) repository provides a framework for creating extensible, repeatable, and shareable skills for Codex. This approach allows you to:
+- **What they are:** Native, on-disk reusable capabilities that Codex can auto-discover. Each skill is a bundle with `name`, `description`, and an optional body kept on disk.
+- **Enable the feature flag:**  
+  - Preferred: add to `~/.codex/config.toml`
+    ```toml
+    [features]
+    skills = true
+    ```
+  - One-off run: `codex --enable skills`
+- **Where skills live:** `~/.codex/skills/**/SKILL.md` (recursive). Only files named exactly `SKILL.md` count; hidden entries and symlinks are skipped.
+- **File format (YAML frontmatter + body):**
+  ```markdown
+  ---
+  name: your-skill-name          # required, ≤100 chars, single line
+  description: when/why to use   # required, ≤500 chars, single line
+  ---
 
-- Define custom workflows and automations
-- Share skills across projects and teams
-- Build libraries of reusable capabilities
-- Take full control of Codex in an extensible way
-
-**Implementation Approaches:**
-
-```bash
-# Using custom prompts directory
-~/.codex/prompts/
-├── code-review.md
-├── refactor-patterns.md
-└── test-generation.md
-
-# Using AGENTS.md for project-specific skills
-# Define standard workflows and patterns in AGENTS.md
-```
-
-**Note:** This is an advanced setup that requires custom integration. Check the [Codex skills discussion](https://github.com/openai/codex/issues/5291) for updates on native skills support. If native skills support has been added since this guide was written, refer to the official documentation for the recommended approach.
-
-See [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) for creating reusable prompt templates.
+  # Optional body (kept on disk)
+  Add references, workflows, or examples here.
+  ```
+- **Using skills:** Mention with `$<skill-name>` in chat or browse/insert via `/skills` in the TUI. Codex injects only `name`, `description`, and the absolute file path.
+- **Validation behavior:** Invalid frontmatter triggers a dismissible startup modal and log entries; invalid skills are ignored until fixed.
+- **Sample in this repo:** `skills/pdf-processing/SKILL.md` follows the official format. Copy or symlink it to `~/.codex/skills/pdf-processing/SKILL.md`, then restart Codex with the feature flag enabled.
+- **Pair with GitHub Skills:** You can combine Codex skills with the learning paths at [github.com/skills](https://github.com/skills) to onboard teams quickly while keeping reusable Codex guidance locally.
 
 </details>
 
@@ -757,6 +757,7 @@ codex "Refactor this code to:
 - [MCP Integration](https://github.com/openai/codex/blob/main/docs/advanced.md#model-context-protocol-mcp) - MCP setup and usage
 - [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) - Creating custom prompts
 - [FAQ](https://github.com/openai/codex/blob/main/docs/faq.md) - Frequently asked questions
+- [Skills (experimental)](https://github.com/openai/codex/blob/main/docs/skills.md) - Official guide to the skills feature flag
 
 **Extensions & Integrations:**
 - [GitHub Action](https://github.com/openai/codex-action) - CI/CD integration
