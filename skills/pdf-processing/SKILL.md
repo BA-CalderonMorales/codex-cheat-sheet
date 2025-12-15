@@ -5,4 +5,4 @@ description: Extract text and tables from PDFs; use when PDFs, forms, or documen
 
 # PDF Processing
 - Use pdfplumber to extract text.
-- For form filling, see FORMS.md.
+- For form filling, pair with your form template or validation steps.
