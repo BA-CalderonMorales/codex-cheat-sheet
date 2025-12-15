@@ -425,7 +425,7 @@ codex exec "explain this file" < app.js > explanation.md
 
 <a id="skills-experimental"></a>
 
-> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs](https://github.com/openai/codex/blob/main/docs/skills.md) for the latest status.
+> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs in the openai/codex repo](https://github.com/openai/codex/blob/main/docs/skills.md) for the latest status.
 
 - **What they are:** Native, on-disk reusable capabilities that Codex can auto-discover. Each skill is a bundle with `name`, `description`, and an optional body kept on disk.
 - **Enable the feature flag:**  
@@ -439,8 +439,8 @@ codex exec "explain this file" < app.js > explanation.md
 - **File format (YAML frontmatter + body):**
   ```markdown
   ---
-  name: your-skill-name          # required, ≤100 chars, single line
-  description: when/why to use   # required, ≤500 chars, single line
+  name: your-skill-name          # required, ≤ 100 chars, single line
+  description: when/why to use   # required, ≤ 500 chars, single line
   ---
 
   # Optional body (kept on disk)
@@ -757,7 +757,7 @@ codex "Refactor this code to:
 - [MCP Integration](https://github.com/openai/codex/blob/main/docs/advanced.md#model-context-protocol-mcp) - MCP setup and usage
 - [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) - Creating custom prompts
 - [FAQ](https://github.com/openai/codex/blob/main/docs/faq.md) - Frequently asked questions
-- [Skills (experimental)](https://github.com/openai/codex/blob/main/docs/skills.md) - Official guide to the skills feature flag
+- [Skills (experimental)](https://github.com/openai/codex/blob/main/docs/skills.md) - Official guide in the openai/codex repository
 
 **Extensions & Integrations:**
 - [GitHub Action](https://github.com/openai/codex-action) - CI/CD integration
