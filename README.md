@@ -128,7 +128,6 @@ Core commands for everyday use.
 /new                      # Start a new chat during conversation
 /init                     # Create an AGENTS.md file with instructions
 /compact                  # Summarize conversation to prevent context limit
-/undo                     # Ask Codex to undo a turn
 /diff                     # Show git diff (including untracked files)
 /mention                  # Mention a file
 /status                   # Show current session config and token usage
@@ -584,7 +583,6 @@ codex "Based on the AGENTS.md file, refactor this code to follow our standards"
 | `/new` | Start a new chat during conversation |
 | `/init` | Create AGENTS.md file with instructions |
 | `/compact` | Summarize conversation to prevent context limit |
-| `/undo` | Ask Codex to undo a turn |
 | `/diff` | Show git diff (including untracked files) |
 | `/mention` | Mention a file |
 | `/status` | Show session config and token usage |
