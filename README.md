@@ -791,5 +791,5 @@ This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https:/
 
 All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
 
-**Last updated**: November 2025  
+**Last updated**: February 2026  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
