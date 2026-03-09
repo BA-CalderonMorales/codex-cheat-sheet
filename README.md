@@ -250,25 +250,45 @@ codex --config model="gpt-5"
 </details>
 
 <details>
+<details>
 <summary><strong>Model Selection</strong></summary>
 
 ```bash
 # Set model in config.toml
-model = "gpt-5"                    # Default model
+model = "gpt-5.3-codex"            # Latest recommended (March 2026)
+model = "gpt-5.4"                   # Newest model with advanced reasoning
+model = "gpt-5"                     # Original GPT-5 (still available)
 
-# For reasoning models (o3, o4-mini, gpt-5, gpt-5-codex):
+# For reasoning models (gpt-5.3-codex, gpt-5.4, gpt-5):
 model_reasoning_effort = "medium"  # minimal, low, medium, high
 model_reasoning_summary = "auto"   # auto, concise, detailed, none
 
 # For GPT-5 family models:
 model_verbosity = "medium"         # low, medium, high
 
-# Models available:
-# - gpt-5-codex (default on macOS/Linux)
-# - gpt-5 (default on Windows)
-# - o3, o4-mini (reasoning models)
+# Models available (as of March 2026):
+# - gpt-5.3-codex (default on macOS/Linux) - Latest Codex-optimized
+# - gpt-5.4 (newest) - Advanced reasoning and accuracy
+# - gpt-5.3-instant - Faster, smoother conversations
+# - gpt-5 (legacy) - Original GPT-5
 # - Other OpenAI models via custom providers
 ```
+
+### GPT-5.3 Updates (March 2026)
+
+**GPT-5.3 Instant** brings smoother conversations with:
+- Better judgment around refusals (fewer unnecessary caveats)
+- More useful web-search answers (less link dumping)
+- Natural conversational flow (no "Stop. Take a breath." preamble)
+- 26.8% reduction in hallucinations with web use
+- Stronger creative writing with more texture
+
+**GPT-5.3-Codex** is the recommended model for Codex CLI:
+- Optimized for code understanding and generation
+- Better at following complex instructions
+- Improved accuracy on technical tasks
+
+See [GPT-5.3 Instant announcement](https://openai.com/index/gpt-5-3-instant/) for details.
 
 </details>
 
@@ -451,6 +471,7 @@ codex exec "explain this file" < app.js > explanation.md
   - `skills/pdf-processing/SKILL.md`
   - `skills/log-review/SKILL.md`
   - `skills/form-filling/SKILL.md`
+  - `skills/project-management/SKILL.md`
 - **Pair with GitHub Skills:** You can combine Codex skills with the learning paths at [github.com/skills](https://github.com/skills) to onboard teams quickly while keeping reusable Codex guidance locally.
 - **Community alternative (pre-native skills):** The [openskills](https://github.com/numman-ali/openskills) project remains a viable open source option if you prefer a community-driven skills system.
 
@@ -791,5 +812,5 @@ This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https:/
 
 All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
 
-**Last updated**: February 2026  
+**Last updated: March 2026  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
