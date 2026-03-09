@@ -21,6 +21,12 @@ npm install -g @openai/codex
 # Or with Homebrew
 brew install --cask codex
 
+# Or with pnpm (official monorepo manager)
+pnpm install -g @openai/codex
+
+# Windows: Direct install script
+# Run: .\install.ps1 from https://github.com/openai/codex/releases
+
 # Launch Codex
 codex
 
@@ -53,11 +59,18 @@ npm install -g @openai/codex
 # Install with Homebrew (macOS)
 brew install --cask codex
 
+# Install with pnpm (official monorepo manager)
+pnpm install -g @openai/codex
+
 # Update with npm
 npm update -g @openai/codex
 
 # Update with Homebrew
 brew upgrade codex
+
+# Windows: Use the install.ps1 script
+# Download from: https://github.com/openai/codex/releases/latest
+# Run: .\install.ps1
 
 # Download binary from GitHub releases
 # Visit: https://github.com/openai/codex/releases/latest
@@ -249,7 +262,6 @@ codex --config model="gpt-5"
 
 </details>
 
-<details>
 <details>
 <summary><strong>Model Selection</strong></summary>
 
@@ -477,6 +489,159 @@ codex exec "explain this file" < app.js > explanation.md
 
 </details>
 
+## New Features 2025-2026
+
+Recent additions to Codex that you should know about:
+
+<details>
+<summary><strong>babysit-pr Skill</strong></summary>
+
+The `babysit-pr` skill automates PR maintenance:
+- Auto-fixes CI failures
+- Handles review comments
+- Watches for merge conflicts
+- Keeps your PRs moving through the pipeline
+
+```bash
+# Use with MCP GitHub integration
+codex "babysit this PR with $github"
+```
+
+</details>
+
+<details>
+<summary><strong>JavaScript REPL (js_repl)</strong></summary>
+
+Persistent JavaScript REPL for incremental code execution:
+- Test code snippets in real-time
+- Iterate on logic without full re-runs
+- Debug complex expressions
+
+```bash
+# Enable in config.toml
+[mcp_servers.js_repl]
+command = "node"
+args = ["-e", "process.stdin.on('data', d => eval(d.toString()))"]
+```
+
+</details>
+
+<details>
+<summary><strong>In-Process App Server</strong></summary>
+
+New architecture for non-interactive `exec` mode:
+- Faster startup times
+- Better for CI/CD integration
+- Reduced overhead for automation scripts
+
+</details>
+
+## AI-Powered Project Management with Codex
+
+Codex isn't just for code - it's a powerful project management assistant. Here's how to leverage it for managing projects, sprints, and tasks:
+
+<details>
+<summary><strong>Project Planning & Breakdown</strong></summary>
+
+```bash
+# Break down a large feature request
+codex "Break down this feature request into actionable tasks:
+- User authentication system
+- Must support OAuth and email
+- Include password reset flow
+- Add 2FA option"
+
+# Generate sprint backlog
+codex exec "Analyze this project and create a sprint backlog:
+- Prioritize by complexity
+- Estimate effort in hours
+- Identify dependencies"
+
+# Create user stories
+codex "Convert these requirements into user stories with acceptance criteria"
+```
+
+</details>
+
+<details>
+<summary><strong>GitHub Integration for Project Management</strong></summary>
+
+```bash
+# Auto-generate PR descriptions
+git diff | codex exec "Create a detailed PR description with:
+- Summary of changes
+- Testing performed
+- Breaking changes (if any)"
+
+# Create issues from TODO comments
+codex exec "Scan for TODO/FIXME comments and create GitHub issues"
+
+# Generate release notes
+codex exec "Create release notes from recent commits"
+```
+
+</details>
+
+<details>
+<summary><strong>Task Tracking & Status Updates</strong></summary>
+
+```bash
+# Generate status report
+codex "Review recent commits and generate a status report for stakeholders"
+
+# Track progress
+codex "What percentage of sprint tasks are complete based on merged PRs?"
+
+# Risk identification
+codex "Analyze this project and identify potential blockers or risks"
+```
+
+</details>
+
+<details>
+<summary><strong>Team Collaboration Patterns</strong></summary>
+
+```bash
+# Code review automation
+codex "Review this PR for:
+- Security vulnerabilities
+- Performance issues
+- Code quality standards
+- Test coverage gaps"
+
+# Documentation sync
+codex "Update the README based on recent feature additions"
+
+# Onboarding assistance
+codex "Create a new developer onboarding guide for this project"
+```
+
+</details>
+
+<details>
+<summary><strong>Creating Project Management Skills</strong></summary>
+
+You can create custom skills for your team's workflow:
+
+```markdown
+# ~/.codex/skills/team-sprint/SKILL.md
+---
+name: team-sprint
+description: Manage sprint planning and tracking for our team
+---
+
+# Sprint Workflow
+1. Use `/standup` to generate daily standup summaries
+2. Use `/retro` to collect retrospective feedback
+3. Use `/velocity` to calculate team velocity
+
+# Templates
+- Sprint planning template in docs/sprint-template.md
+- Retrospective format: Start/Stop/Continue
+```
+
+</details>
+
 ## Level 5: Expert Workflows
 
 Advanced patterns and automation.
@@ -502,217 +667,87 @@ See [GitHub Action](https://github.com/openai/codex-action) for details.
 </details>
 
 <details>
-<summary><strong>TypeScript SDK</strong></summary>
-
-```typescript
-// Programmatic Codex usage
-import { Codex } from '@openai/codex-sdk';
-
-const codex = new Codex({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-const response = await codex.exec({
-  prompt: "Analyze this codebase",
-  workingDirectory: "./src"
-});
-
-console.log(response.output);
-```
-
-See [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript) for details.
-
-</details>
-
-<details>
-<summary><strong>Automated Workflows</strong></summary>
+<summary><strong>Automated Code Review</strong></summary>
 
 ```bash
-# Code review automation
-#!/bin/bash
-git diff HEAD~1 | codex exec "review for bugs" > review.md
+# Review entire PR
+codex "Review this PR for security, performance, and maintainability"
 
-# Documentation generation
-codex exec "generate API docs from comments" > API.md
+# Generate commit messages
+git diff HEAD~1 | codex exec "Create a conventional commit message"
 
-# Test generation
-codex exec "create tests for all functions in src/" > tests/
-
-# Release notes
-git log --oneline v1.0..HEAD | codex exec "create release notes" > RELEASE_NOTES.md
+# Auto-fix common issues
+codex "Fix all ESLint errors in this project"
 ```
 
 </details>
 
 <details>
-<summary><strong>Complex Prompts</strong></summary>
+<summary><strong>CI/CD Pipeline Assistance</strong></summary>
 
 ```bash
-# Multi-step tasks
-codex exec "
-1. Analyze the codebase structure
-2. Identify potential performance bottlenecks
-3. Suggest specific optimizations
-4. Create an implementation plan
-"
+# Generate CI config
+codex "Create a GitHub Actions workflow for:
+- TypeScript project
+- Run tests on PR
+- Deploy to Vercel on main"
 
-# Contextual analysis
-codex "Based on the AGENTS.md file, refactor this code to follow our standards"
+# Debug CI failures
+cat .github/workflows/build.log | codex exec "Find the root cause"
 ```
 
 </details>
 
 <details>
-<summary><strong>Zero Data Retention (ZDR)</strong></summary>
+<summary><strong>Legacy Code Migration</strong></summary>
 
 ```bash
-# ZDR is available for Enterprise customers
-# Data is not used for training
-# API requests not logged beyond 30 days
-# Configure via your OpenAI Enterprise account settings
+# Convert between languages
+codex "Convert this Python utility to TypeScript"
 
-# For more info:
-# See: https://github.com/openai/codex/blob/main/docs/zdr.md
+# Update deprecated APIs
+codex "Update all React class components to functional components with hooks"
+
+# Add type safety
+codex "Add TypeScript types to this JavaScript project"
 ```
 
 </details>
 
-## Command Reference
-
-### CLI Commands
-
-| Command | Description | Example |
-|---------|-------------|---------|
-| `codex` | Start interactive TUI | `codex` |
-| `codex "prompt"` | Start with initial prompt | `codex "explain this"` |
-| `codex exec "..."` | Non-interactive execution | `codex exec "analyze code"` |
-| `codex resume` | Resume session (picker) | `codex resume` |
-| `codex resume --last` | Resume most recent session | `codex resume --last` |
-| `codex resume <ID>` | Resume specific session | `codex resume abc-123` |
-| `codex --version` | Show version | `codex --version` |
-| `codex --model <model>` | Use specific model | `codex --model gpt-5` |
-| `codex --cd <dir>` | Set working directory | `codex --cd /path/to/project` |
-| `codex --add-dir <dir>` | Add extra writable directory | `codex --add-dir ../backend` |
-
-### Slash Commands
-
-| Command | Description |
-|---------|-------------|
-| `/model` | Choose model and reasoning effort |
-| `/approvals` | Configure approval settings |
-| `/review` | Review current changes and find issues |
-| `/new` | Start a new chat during conversation |
-| `/init` | Create AGENTS.md file with instructions |
-| `/compact` | Summarize conversation to prevent context limit |
-| `/diff` | Show git diff (including untracked files) |
-| `/mention` | Mention a file |
-| `/status` | Show session config and token usage |
-| `/mcp` | List configured MCP tools |
-| `/logout` | Log out of Codex |
-| `/quit` | Exit Codex |
-| `/exit` | Exit Codex |
-| `/feedback` | Send logs to maintainers |
-
-### Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+C` | Cancel operation |
-| `Ctrl+D` | Exit Codex |
-| `Tab` | Auto-complete |
-| `↑/↓` | Command history |
-| `Esc Esc` | Edit previous message (backtrack mode) |
-| `@` | Trigger fuzzy file search |
-| `Ctrl+V` / `Cmd+V` | Paste images into composer |
-
-## Best Practices
-
 <details>
-<summary><strong>Effective Prompting</strong></summary>
-
-**Do:**
-- Be specific and clear
-- Break complex tasks into steps
-- Provide context in AGENTS.md
-- Use slash commands for common tasks
-- Review Codex's plan before approval
-
-**Don't:**
-- Give vague instructions
-- Skip reviewing bash commands
-- Ignore security warnings
-- Over-rely on auto-approve
-
-</details>
-
-<details>
-<summary><strong>Security Tips</strong></summary>
-
-- Always review bash commands before approval
-- Use `approval_policy = "untrusted"` to be prompted for risky commands
-- Use `sandbox_mode = "read-only"` for analysis tasks
-- Use `sandbox_mode = "workspace-write"` to limit writes to project directory
-- Avoid `sandbox_mode = "danger-full-access"` unless in controlled environment
-- Enable ZDR for Enterprise customers with sensitive projects
-- Keep Codex updated for latest security features
-
-</details>
-
-<details>
-<summary><strong>Performance Tips</strong></summary>
-
-- Use `/compact` to summarize long conversations and free up context
-- Use `/new` to start fresh chat within same session
-- Create AGENTS.md files to provide project context once
-- Use `codex exec` for automated, non-interactive workflows
-- Configure MCP servers for extended capabilities
-- Use profiles for different project types
-
-</details>
-
-<details>
-<summary><strong>Project Organization</strong></summary>
+<summary><strong>Performance Optimization</strong></summary>
 
 ```bash
-# Recommended structure
-project/
-├── AGENTS.md              # Project context for Codex
-├── .codex/
-│   └── prompts/          # Custom prompts
-├── src/                  # Source code
-└── docs/                 # Documentation
+# Analyze bottlenecks
+codex "Profile this code and identify performance bottlenecks"
+
+# Optimize database queries
+codex "Refactor these N+1 queries to use batch loading"
+
+# Bundle optimization
+codex "Suggest webpack optimizations to reduce bundle size"
 ```
 
 </details>
 
 <details>
-<summary><strong>Team Collaboration</strong></summary>
-
-- Share AGENTS.md in version control
-- Create team-specific custom prompts
-- Document Codex workflows in README
-- Use consistent coding standards
-- Review Codex-generated code together
-
-</details>
-
-## Common Use Cases
-
-<details>
-<summary><strong>Code Review</strong></summary>
+<summary><strong>Security Auditing</strong></summary>
 
 ```bash
-codex "Review this PR for:
-1. Security vulnerabilities
-2. Performance issues
-3. Code style violations
-4. Test coverage"
+# Find vulnerabilities
+codex "Audit this code for security vulnerabilities"
+
+# Dependency checks
+codex "Review package.json for outdated or vulnerable dependencies"
+
+# Compliance check
+codex "Check if this code follows OWASP security guidelines"
 ```
 
 </details>
 
 <details>
-<summary><strong>Debugging</strong></summary>
+<summary><strong>Troubleshooting & Debugging</strong></summary>
 
 ```bash
 # Analyze error logs
@@ -720,6 +755,9 @@ cat error.log | codex exec "find the root cause"
 
 # Debug specific function
 codex "Debug why the login function is failing"
+
+# Reproduce and fix
+codex "Create a test case that reproduces this bug, then fix it"
 ```
 
 </details>
@@ -749,6 +787,9 @@ codex "Create unit tests for all functions in utils.js"
 
 # Test coverage
 codex "Analyze test coverage and suggest missing tests"
+
+# E2E test generation
+codex "Create Playwright E2E tests for the user flow"
 ```
 
 </details>
@@ -812,5 +853,5 @@ This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https:/
 
 All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
 
-**Last updated: March 2026  
+**Last updated: March 2026**  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
