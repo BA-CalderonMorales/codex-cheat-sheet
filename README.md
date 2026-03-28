@@ -1,12 +1,12 @@
 <div align="center">
 
-# Codex Cheat Sheet (Beta)
+# Codex Cheat Sheet
 
 <img width="3840" height="1317" alt="image" src="https://github.com/user-attachments/assets/0749d33a-de10-4f1e-8ae7-492d61dc37a0" />
 
-> **Your complete guide to mastering OpenAI Codex - from zero to hero in minutes!**
+> **Your complete guide to mastering OpenAI Codex — from zero to productive in minutes.**
 
-Ultimate collection of Codex tips, tricks, hacks, and workflows that you can use to master Codex CLI without having to remember every command.
+A practical reference for using OpenAI Codex CLI effectively. Focuses on patterns that help you think critically about what to delegate and what to handle yourself.
 
 **Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
 
