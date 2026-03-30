@@ -828,6 +828,9 @@ codex "Refactor this code to:
 - [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript) - Programmatic usage
 - [VS Code Extension](https://developers.openai.com/codex/ide) - IDE integration
 
+**Related Tools:**
+- [Kimi Cheat Sheet](https://github.com/BA-CalderonMorales/kimi-cheat-sheet) - Companion guide for Kimi Code CLI
+
 **Model Context Protocol:**
 - [MCP Specification](https://modelcontextprotocol.io/) - Official MCP protocol docs
 - [MCP Server Examples](https://github.com/modelcontextprotocol/servers) - Community MCP servers
