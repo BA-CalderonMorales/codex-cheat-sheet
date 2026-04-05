@@ -34,6 +34,13 @@ This cheat sheet is a starting point, not a replacement for official documentati
 - Direct users to the source for latest updates and detailed explanations
 - Make it easy for users to dive deeper when they need more information
 
+## Working Rules
+
+- If a prompt would require a major architectural deviation, stop and explain before proceeding.
+- Keep changes and milestones separated into distinct commits.
+- After each change or milestone, commit and push before starting the next one.
+- Do not bundle unrelated work from different prompts into the same commit.
+
 ## Content Guidelines
 
 ### What to Include
