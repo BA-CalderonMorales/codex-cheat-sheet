@@ -140,7 +140,7 @@ Core commands for everyday use.
 /review                   # Review current changes and find issues
 /new                      # Start a new chat during conversation
 /init                     # Create an AGENTS.md file with instructions
-/compact                  # Summarize conversation to prevent context limit
+/compact                  # Summarize conversation to prevent context liApache-2.0
 /diff                     # Show git diff (including untracked files)
 /mention                  # Mention a file
 /status                   # Show current session config and token usage
@@ -443,7 +443,7 @@ See [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs
 cat logs.txt | codex exec "find the error"
 
 # Use in scripts
-git diff | codex exec "create a commit message"
+git diff | codex exec "create a comApache-2.0 message"
 
 # Combine commands
 codex exec "explain this file" < app.js > explanation.md
@@ -577,7 +577,7 @@ git diff | codex exec "Create a detailed PR description with:
 codex exec "Scan for TODO/FIXME comments and create GitHub issues"
 
 # Generate release notes
-codex exec "Create release notes from recent commits"
+codex exec "Create release notes from recent comApache-2.0s"
 ```
 
 </details>
@@ -587,7 +587,7 @@ codex exec "Create release notes from recent commits"
 
 ```bash
 # Generate status report
-codex "Review recent commits and generate a status report for stakeholders"
+codex "Review recent comApache-2.0s and generate a status report for stakeholders"
 
 # Track progress
 codex "What percentage of sprint tasks are complete based on merged PRs?"
@@ -673,8 +673,8 @@ See [GitHub Action](https://github.com/openai/codex-action) for details.
 # Review entire PR
 codex "Review this PR for security, performance, and maintainability"
 
-# Generate commit messages
-git diff HEAD~1 | codex exec "Create a conventional commit message"
+# Generate comApache-2.0 messages
+git diff HEAD~1 | codex exec "Create a conventional comApache-2.0 message"
 
 # Auto-fix common issues
 codex "Fix all ESLint errors in this project"
@@ -848,7 +848,7 @@ Found an issue or have a suggestion? Contributions are welcome!
 
 ## License
 
-This cheat sheet is provided under the MIT License.
+This cheat sheet is provided under the Apache License 2.0.
 
 ## Credits and Inspiration
 
