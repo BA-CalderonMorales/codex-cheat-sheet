@@ -136,7 +136,9 @@ Core commands for everyday use.
 
 ```bash
 /model                    # Choose model and reasoning effort
-/approvals                # Configure what Codex can do without approval
+/permissions              # Configure what Codex can do without approval
+/fast                     # Toggle Fast mode for supported models
+/personality              # Choose a communication style
 /review                   # Review current changes and find issues
 /new                      # Start a new chat during conversation
 /init                     # Create an AGENTS.md file with instructions
@@ -145,10 +147,15 @@ Core commands for everyday use.
 /mention                  # Mention a file
 /status                   # Show current session config and token usage
 /mcp                      # List configured MCP tools
+/side                     # Start an ephemeral side conversation
+/fork                     # Fork the current conversation into a new thread
+/ps                       # Show background terminals and their output
+/stop                     # Stop all background terminals
 /logout                   # Log out of Codex
 /quit                     # Exit Codex
 /exit                     # Exit Codex
 /feedback                 # Send logs to maintainers
+/goal                     # Set or view an experimental task goal
 ```
 
 </details>
@@ -492,6 +499,38 @@ codex exec "explain this file" < app.js > explanation.md
 ## New Features 2025-2026
 
 Recent additions to Codex that you should know about:
+
+<details>
+<summary><strong>Task Goals (experimental)</strong></summary>
+
+The `/goal` command sets a persisted objective for a long-running task. It loops plan → act → test → review until your stop condition is met.
+
+**Enable it:**
+
+```bash
+# Add to ~/.codex/config.toml
+[features]
+goals = true
+```
+
+**Usage:**
+
+```bash
+/goal Finish the migration and keep tests green    # Set a goal
+/goal                                               # View current goal
+/goal pause                                         # Pause the current run
+/goal resume                                        # Resume a paused run
+/goal clear                                         # Clear the current goal
+```
+
+**When to use:** Multi-hour validated work with a clear "done" definition.
+**Skip it:** If you are still exploring or making judgment calls.
+
+> **Note:** `/goal` is experimental. Define one measurable stop condition. Use `/goal pause` or `/goal clear` if it drifts. Run on a scratch branch.
+
+See [OpenAI's follow-a-goal docs](https://developers.openai.com/codex/cli/slash-commands) for details.
+
+</details>
 
 <details>
 <summary><strong>babysit-pr Skill</strong></summary>
@@ -856,8 +895,8 @@ This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https:/
 
 All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
 
-**Last updated: March 2026**  
+**Last updated: May 2026**  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
 
 ---
-*Last synced: 2026-03-30 via [workspace manager](https://github.com/BA-CalderonMorales)*
+*Last synced: 2026-05-14 via [workspace manager](https://github.com/BA-CalderonMorales)*
