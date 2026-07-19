@@ -139,7 +139,9 @@ Core commands for everyday use.
 
 ```bash
 /model                    # Choose model and reasoning effort
-/approvals                # Configure what Codex can do without approval
+/permissions              # Configure what Codex can do without approval
+/fast                     # Toggle Fast mode for supported models
+/personality              # Choose a communication style
 /review                   # Review current changes and find issues
 /new                      # Start a new chat during conversation
 /init                     # Create an AGENTS.md file with instructions
@@ -149,6 +151,10 @@ Core commands for everyday use.
 /mention                  # Mention a file
 /status                   # Show current session config and token usage
 /mcp                      # List configured MCP tools
+/side                     # Start an ephemeral side conversation
+/fork                     # Fork the current conversation into a new thread
+/ps                       # Show background terminals and their output
+/stop                     # Stop all background terminals
 /logout                   # Log out of Codex
 /quit                     # Exit Codex
 /exit                     # Exit Codex
