@@ -43,7 +43,7 @@ codex --version
 - **[Level 2: Basic Commands](#level-2-basic-commands)**
 - **[Level 3: Intermediate Usage](#level-3-intermediate-usage)**
 - **[Level 4: Advanced Features](#level-4-advanced-features)**
-- **[Skills (experimental)](#skills-experimental)** - Native, reusable capabilities with feature flag
+- **[Skills](#skills)** - Native, reusable capabilities
 - **[Level 5: Expert Workflows](#level-5-expert-workflows)**
 - **[Command Reference](#command-reference)**
 - **[Best Practices](#best-practices)**
@@ -464,20 +464,11 @@ codex exec "explain this file" < app.js > explanation.md
 </details>
 
 <details>
-<summary><strong>Skills (experimental)</strong></summary>
+<summary><strong>Skills</strong></summary>
 
-<a id="skills-experimental"></a>
+<a id="skills"></a>
 
-> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs](https://developers.openai.com/codex/skills-and-plugins) for the latest status.
-
-- **What they are:** Native, on-disk reusable capabilities that Codex can auto-discover. Each skill is a bundle with `name`, `description`, and an optional body kept on disk.
-- **Enable the feature flag:**  
-  - Preferred: add to `~/.codex/config.toml`
-    ```toml
-    [features]
-    skills = true
-    ```
-  - One-off run: `codex --enable skills`
+- **What they are:** Native, on-disk reusable capabilities that Codex can auto-discover. Each skill is a bundle with `name`, `description`, and an optional body kept on disk. Skills are generally available — no feature flag required.
 - **Where skills live:** `~/.codex/skills/**/SKILL.md` (recursive). Only files named exactly `SKILL.md` count; hidden entries and symlinks are skipped.
 - **File format (YAML frontmatter + body):**
   ```markdown
@@ -491,7 +482,7 @@ codex exec "explain this file" < app.js > explanation.md
   ```
 - **Using skills:** Mention with `$<skill-name>` in chat or browse/insert via `/skills` in the TUI. Codex injects only `name`, `description`, and the absolute file path.
 - **Validation behavior:** Invalid frontmatter triggers a dismissible startup modal and log entries; invalid skills are ignored until fixed.
-- **Sample skills in this repo:** Copy or symlink any of the samples below into `~/.codex/skills/<name>/SKILL.md`, then restart Codex with the feature flag enabled:
+- **Sample skills in this repo:** Copy or symlink any of the samples below into `~/.codex/skills/<name>/SKILL.md`, then restart Codex:
   - `skills/pdf-processing/SKILL.md`
   - `skills/log-review/SKILL.md`
   - `skills/form-filling/SKILL.md`
@@ -857,7 +848,7 @@ codex "Refactor this code to:
 - [MCP Integration](https://developers.openai.com/codex/configuration) - MCP setup and usage
 - [Custom Prompts](https://developers.openai.com/codex/prompting) - Creating custom prompts
 - [FAQ](https://developers.openai.com/codex/reference/troubleshooting) - Frequently asked questions
-- [Skills (experimental)](https://developers.openai.com/codex/skills-and-plugins) - Official guide
+- [Skills](https://developers.openai.com/codex/skills-and-plugins) - Official guide
 
 **Extensions & Integrations:**
 - [GitHub Action](https://github.com/openai/codex-action) - CI/CD integration
