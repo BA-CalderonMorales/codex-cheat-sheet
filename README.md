@@ -875,7 +875,7 @@ Found an issue or have a suggestion? Contributions are welcome!
 
 ## License
 
-This cheat sheet is provided under the Apache License 2.0.
+MIT License — Free to use and modify.
 
 ## Credits and Inspiration
 
