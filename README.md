@@ -2,7 +2,7 @@
 
 # Codex Cheat Sheet
 
-<img width="832" height="406" alt="Codex cheat sheet" src="assets/image.png" />
+<a href="https://openai.com/codex/"><img width="763" height="341" alt="Codex cheat sheet" src="assets/image.png" /></a>
 
 > **Your complete guide to mastering OpenAI Codex — from zero to productive in minutes.**
 
