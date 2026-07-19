@@ -2,20 +2,23 @@
 
 # Codex Cheat Sheet
 
-<img width="3840" height="1317" alt="image" src="https://github.com/user-attachments/assets/0749d33a-de10-4f1e-8ae7-492d61dc37a0" />
+<a href="https://openai.com/codex/"><img width="763" height="341" alt="Codex cheat sheet" src="assets/image.png" /></a>
 
 > **Your complete guide to mastering OpenAI Codex — from zero to productive in minutes.**
 
 A practical reference for using OpenAI Codex CLI effectively. Focuses on patterns that help you think critically about what to delegate and what to handle yourself.
 
-**Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex repository](https://github.com/openai/codex). For the most up-to-date information, always refer to the official docs.
+**Based on official OpenAI Codex documentation** - All commands and examples are sourced from the [official Codex documentation](https://developers.openai.com/codex). For the most up-to-date information, always refer to the official docs.
 
 </div>
 
 ## Quick Start
 
 ```bash
-# Install with npm
+# Install with the official installer (recommended)
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+
+# Or with npm
 npm install -g @openai/codex
 
 # Or with Homebrew
@@ -143,6 +146,7 @@ Core commands for everyday use.
 /new                      # Start a new chat during conversation
 /init                     # Create an AGENTS.md file with instructions
 /compact                  # Summarize conversation to prevent context limit
+/debug                    # Toggle debug mode for detailed logging
 /diff                     # Show git diff (including untracked files)
 /mention                  # Mention a file
 /status                   # Show current session config and token usage
@@ -155,7 +159,7 @@ Core commands for everyday use.
 /quit                     # Exit Codex
 /exit                     # Exit Codex
 /feedback                 # Send logs to maintainers
-/goal                     # Set or view an experimental task goal
+/goal                     # Set or view a persistent task goal
 ```
 
 </details>
@@ -274,40 +278,41 @@ codex --config model="gpt-5"
 
 ```bash
 # Set model in config.toml
-model = "gpt-5.3-codex"            # Latest recommended (March 2026)
-model = "gpt-5.4"                   # Newest model with advanced reasoning
-model = "gpt-5"                     # Original GPT-5 (still available)
+model = "gpt-5.6-sol"              # Flagship: complex coding, computer use, research (recommended, July 2026)
+model = "gpt-5.6-terra"            # Balanced: everyday coding and knowledge work
+model = "gpt-5.6-luna"             # Fast: lightweight tasks, lowest cost
 
-# For reasoning models (gpt-5.3-codex, gpt-5.4, gpt-5):
+# For reasoning models (gpt-5.6-sol, gpt-5.6-terra):
 model_reasoning_effort = "medium"  # minimal, low, medium, high
 model_reasoning_summary = "auto"   # auto, concise, detailed, none
 
 # For GPT-5 family models:
 model_verbosity = "medium"         # low, medium, high
 
-# Models available (as of March 2026):
-# - gpt-5.3-codex (default on macOS/Linux) - Latest Codex-optimized
-# - gpt-5.4 (newest) - Advanced reasoning and accuracy
-# - gpt-5.3-instant - Faster, smoother conversations
-# - gpt-5 (legacy) - Original GPT-5
+# Models available (as of July 2026):
+# - gpt-5.6-sol (recommended) - Flagship for complex coding, computer use, research, security work
+# - gpt-5.6-terra - Balances capability and cost for everyday coding and knowledge work
+# - gpt-5.6-luna - Fastest, lowest-cost option for lightweight tasks
+# - gpt-5 (legacy) - Original GPT-5 (still available)
 # - Other OpenAI models via custom providers
 ```
 
-### GPT-5.3 Updates (March 2026)
+### GPT-5.6 Updates (July 2026)
 
-**GPT-5.3 Instant** brings smoother conversations with:
-- Better judgment around refusals (fewer unnecessary caveats)
-- More useful web-search answers (less link dumping)
-- Natural conversational flow (no "Stop. Take a breath." preamble)
-- 26.8% reduction in hallucinations with web use
-- Stronger creative writing with more texture
+**GPT-5.6 Sol** is the new flagship model:
+- Purpose-built for complex coding, computer use, research, and security work
+- Default Power setting uses Sol with medium reasoning effort
+- Superior instruction following and technical accuracy
 
-**GPT-5.3-Codex** is the recommended model for Codex CLI:
-- Optimized for code understanding and generation
-- Better at following complex instructions
-- Improved accuracy on technical tasks
+**GPT-5.6 Terra** balances capability and cost:
+- Optimized for everyday coding and knowledge work
+- Strong reasoning with efficient token usage
 
-See [GPT-5.3 Instant announcement](https://openai.com/index/gpt-5-3-instant/) for details.
+**GPT-5.6 Luna** is the fastest, lowest-cost option:
+- Ideal for lightweight tasks and quick iterations
+- Maintains quality while minimizing latency
+
+See [GPT-5.6 announcement](https://openai.com/index/gpt-5-6/) for details.
 
 </details>
 
@@ -384,7 +389,7 @@ codex mcp logout <name>               # OAuth logout
 # - Sentry (log access)
 ```
 
-See [MCP Documentation](https://github.com/openai/codex/blob/main/docs/config.md#mcp-integration) for details.
+See [MCP Documentation](https://developers.openai.com/codex/configuration) for details.
 
 </details>
 
@@ -411,7 +416,7 @@ exclude_tmpdir_env_var = false
 exclude_slash_tmp = false
 ```
 
-See [Sandbox & Approvals](https://github.com/openai/codex/blob/main/docs/sandbox.md) for details.
+See [Sandbox & Approvals](https://developers.openai.com/codex/sandboxing) for details.
 
 </details>
 
@@ -438,7 +443,7 @@ codex exec --output-schema schema.json "extract project details"
 codex exec -o output.txt "generate docs"
 ```
 
-See [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs/exec.md) for details.
+See [Non-Interactive Mode (exec)](https://developers.openai.com/codex/non-interactive-mode) for details.
 
 </details>
 
@@ -450,7 +455,7 @@ See [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs
 cat logs.txt | codex exec "find the error"
 
 # Use in scripts
-git diff | codex exec "create a commit message"
+git diff | codex exec "create a comApache-2.0 message"
 
 # Combine commands
 codex exec "explain this file" < app.js > explanation.md
@@ -463,7 +468,7 @@ codex exec "explain this file" < app.js > explanation.md
 
 <a id="skills-experimental"></a>
 
-> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs in the openai/codex repo](https://github.com/openai/codex/blob/main/docs/skills.md) for the latest status.
+> **Warning:** Skills are experimental and may change or be removed at any time before GA. Expect breaking changes and always check the [official skills docs](https://developers.openai.com/codex/skills-and-plugins) for the latest status.
 
 - **What they are:** Native, on-disk reusable capabilities that Codex can auto-discover. Each skill is a bundle with `name`, `description`, and an optional body kept on disk.
 - **Enable the feature flag:**  
@@ -501,17 +506,9 @@ codex exec "explain this file" < app.js > explanation.md
 Recent additions to Codex that you should know about:
 
 <details>
-<summary><strong>Task Goals (experimental)</strong></summary>
+<summary><strong>Task Goals</strong></summary>
 
 The `/goal` command sets a persisted objective for a long-running task. It loops plan → act → test → review until your stop condition is met.
-
-**Enable it:**
-
-```bash
-# Add to ~/.codex/config.toml
-[features]
-goals = true
-```
 
 **Usage:**
 
@@ -526,7 +523,7 @@ goals = true
 **When to use:** Multi-hour validated work with a clear "done" definition.
 **Skip it:** If you are still exploring or making judgment calls.
 
-> **Note:** `/goal` is experimental. Define one measurable stop condition. Use `/goal pause` or `/goal clear` if it drifts. Run on a scratch branch.
+> **Note:** Define one measurable stop condition. Use `/goal pause` or `/goal clear` if it drifts. Run on a scratch branch.
 
 See [OpenAI's follow-a-goal docs](https://developers.openai.com/codex/cli/slash-commands) for details.
 
@@ -616,7 +613,7 @@ git diff | codex exec "Create a detailed PR description with:
 codex exec "Scan for TODO/FIXME comments and create GitHub issues"
 
 # Generate release notes
-codex exec "Create release notes from recent commits"
+codex exec "Create release notes from recent comApache-2.0s"
 ```
 
 </details>
@@ -626,7 +623,7 @@ codex exec "Create release notes from recent commits"
 
 ```bash
 # Generate status report
-codex "Review recent commits and generate a status report for stakeholders"
+codex "Review recent comApache-2.0s and generate a status report for stakeholders"
 
 # Track progress
 codex "What percentage of sprint tasks are complete based on merged PRs?"
@@ -712,8 +709,8 @@ See [GitHub Action](https://github.com/openai/codex-action) for details.
 # Review entire PR
 codex "Review this PR for security, performance, and maintainability"
 
-# Generate commit messages
-git diff HEAD~1 | codex exec "Create a conventional commit message"
+# Generate comApache-2.0 messages
+git diff HEAD~1 | codex exec "Create a conventional comApache-2.0 message"
 
 # Auto-fix common issues
 codex "Fix all ESLint errors in this project"
@@ -850,21 +847,21 @@ codex "Refactor this code to:
 
 **Official OpenAI Codex Documentation:**
 - [Official Repository](https://github.com/openai/codex) - Main repository and documentation hub
-- [Getting Started Guide](https://github.com/openai/codex/blob/main/docs/getting-started.md) - Comprehensive getting started guide
-- [Configuration Reference](https://github.com/openai/codex/blob/main/docs/config.md) - Complete config.toml reference
-- [Slash Commands](https://github.com/openai/codex/blob/main/docs/slash_commands.md) - All slash commands explained
-- [Non-Interactive Mode (exec)](https://github.com/openai/codex/blob/main/docs/exec.md) - Automation with codex exec
-- [Authentication](https://github.com/openai/codex/blob/main/docs/authentication.md) - Authentication methods
-- [Sandbox & Approvals](https://github.com/openai/codex/blob/main/docs/sandbox.md) - Security and sandboxing
-- [AGENTS.md Documentation](https://github.com/openai/codex/blob/main/docs/agents_md.md) - Project instructions guide
-- [MCP Integration](https://github.com/openai/codex/blob/main/docs/advanced.md#model-context-protocol-mcp) - MCP setup and usage
-- [Custom Prompts](https://github.com/openai/codex/blob/main/docs/prompts.md) - Creating custom prompts
-- [FAQ](https://github.com/openai/codex/blob/main/docs/faq.md) - Frequently asked questions
-- [Skills (experimental)](https://github.com/openai/codex/blob/main/docs/skills.md) - Official guide in the openai/codex repository
+- [Getting Started Guide](https://developers.openai.com/codex/quickstart) - Comprehensive getting started guide
+- [Configuration Reference](https://developers.openai.com/codex/configuration) - Complete config.toml reference
+- [Slash Commands](https://developers.openai.com/codex/reference/slash-commands) - All slash commands explained
+- [Non-Interactive Mode (exec)](https://developers.openai.com/codex/non-interactive-mode) - Automation with codex exec
+- [Authentication](https://developers.openai.com/codex/auth) - Authentication methods
+- [Sandbox & Approvals](https://developers.openai.com/codex/sandboxing) - Security and sandboxing
+- [AGENTS.md Documentation](https://developers.openai.com/codex/agent-configuration/agents-md) - Project instructions guide
+- [MCP Integration](https://developers.openai.com/codex/configuration) - MCP setup and usage
+- [Custom Prompts](https://developers.openai.com/codex/prompting) - Creating custom prompts
+- [FAQ](https://developers.openai.com/codex/reference/troubleshooting) - Frequently asked questions
+- [Skills (experimental)](https://developers.openai.com/codex/skills-and-plugins) - Official guide
 
 **Extensions & Integrations:**
 - [GitHub Action](https://github.com/openai/codex-action) - CI/CD integration
-- [TypeScript SDK](https://github.com/openai/codex/tree/main/sdk/typescript) - Programmatic usage
+- [TypeScript SDK](https://developers.openai.com/codex/codex-sdk) - Programmatic usage
 - [VS Code Extension](https://developers.openai.com/codex/ide) - IDE integration
 
 **Related Tools:**
@@ -887,16 +884,16 @@ Found an issue or have a suggestion? Contributions are welcome!
 
 ## License
 
-This cheat sheet is provided under the MIT License.
+This cheat sheet is provided under the Apache License 2.0.
 
 ## Credits and Inspiration
 
 This cheat sheet was inspired by the excellent [claude-code-cheat-sheet](https://github.com/Njengah/claude-code-cheat-sheet) by @Njengah. We adapted their progressive learning structure to create a similar quick reference guide for OpenAI Codex CLI.
 
-All commands and examples are verified against the [official OpenAI Codex documentation](https://github.com/openai/codex).
+All commands and examples are verified against the [official OpenAI Codex documentation](https://developers.openai.com/codex).
 
-**Last updated: May 2026**  
+**Last updated: July 2026**  
 **Based on**: OpenAI Codex CLI (npm: @openai/codex)
 
 ---
-*Last synced: 2026-05-14 via [workspace manager](https://github.com/BA-CalderonMorales)*
+*Last synced: 2026-07-19 via [workspace manager](https://github.com/BA-CalderonMorales)*
