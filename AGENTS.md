@@ -50,6 +50,7 @@
 - Stop and explain before major architectural changes
 - One change per commit, commit before starting next
 - Do not bundle unrelated work into the same commit
+- **Branch flow (canonical):** All changes go through `develop`. Branch a topic branch off `develop`, make the change, merge the topic branch into `develop`, then merge `develop` into `main`. Never open a PR directly from a topic branch to `main`. This keeps `develop` as the integration branch and makes contribution easy to demonstrate and follow.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
