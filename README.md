@@ -16,7 +16,7 @@ A practical reference for using OpenAI Codex CLI effectively. Focuses on pattern
 
 ```bash
 # Install with the official installer (recommended)
-curl -fsSL https://chatgpt.com/codex/install.sh | sh
+# See GitHub releases for installers: https://github.com/openai/codex/releases
 
 # Or with npm
 npm install -g @openai/codex
@@ -455,7 +455,7 @@ See [Non-Interactive Mode (exec)](https://developers.openai.com/codex/non-intera
 cat logs.txt | codex exec "find the error"
 
 # Use in scripts
-git diff | codex exec "create a comApache-2.0 message"
+git diff | codex exec "create a conventional commit message"
 
 # Combine commands
 codex exec "explain this file" < app.js > explanation.md
@@ -604,7 +604,7 @@ git diff | codex exec "Create a detailed PR description with:
 codex exec "Scan for TODO/FIXME comments and create GitHub issues"
 
 # Generate release notes
-codex exec "Create release notes from recent comApache-2.0s"
+codex exec "Create release notes from recent commits"
 ```
 
 </details>
@@ -614,7 +614,7 @@ codex exec "Create release notes from recent comApache-2.0s"
 
 ```bash
 # Generate status report
-codex "Review recent comApache-2.0s and generate a status report for stakeholders"
+codex "Review recent commits and generate a status report for stakeholders"
 
 # Track progress
 codex "What percentage of sprint tasks are complete based on merged PRs?"
@@ -700,8 +700,8 @@ See [GitHub Action](https://github.com/openai/codex-action) for details.
 # Review entire PR
 codex "Review this PR for security, performance, and maintainability"
 
-# Generate comApache-2.0 messages
-git diff HEAD~1 | codex exec "Create a conventional comApache-2.0 message"
+# Generate conventional commit messages
+git diff HEAD~1 | codex exec "Create a conventional commit message"
 
 # Auto-fix common issues
 codex "Fix all ESLint errors in this project"
