@@ -1,0 +1,39 @@
+name: Weekly README check
+
+on:
+  schedule:
+    - cron: '0 12 * * 0' # every Sunday at 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Script uses only the Python standard library; no deps required
+      - name: Run README check script
+        run: |
+          python .github/scripts/check_readme.py
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: automated README fixes"
+      - name: Create PR if changes
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "chore: automated README fixes"
+          branch: "automate/readme-update-${{ github.run_id }}"
+          title: "chore: automated README fixes"
+          body: |
+            Automated README checks applied by workflow.
+            - What changed: automated link fixes / minor wording updates
+            - Why: keep README current
+            - Verification: preview README in PR
+          assignees: "@{session_creator}"
+          draft: false
