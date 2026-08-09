@@ -1,56 +1,65 @@
 # AGENTS.md - Codex Cheat Sheet
 
-## Quick Reference
+## Current Shape
 
-- **Purpose**: Quick reference guide for OpenAI Codex CLI
-- **Structure**: Progressive difficulty (Level 1 → Level 5)
-- **Style**: Command reference tables, collapsible sections
+- The product is the README single page: progressive levels (Level 1 ->
+  Level 5), quick-reference tables, and `<details>` sections for scannable
+  command lookups.
+- `skills/<name>/` holds on-disk reusable capabilities as `SKILL.md` files
+  (form-filling, log-review, pdf-processing, project-management).
+- `assets/` holds the sheet imagery; `.github/workflows/security-scan.yml`
+  is the CI gate (shared org-level scan, Trivy by default).
+- Community surface: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `LICENSE`.
+- Pre-rewrite leftovers are pruned; use Git history for legacy reference.
 
-## Core Principles
+## Key Sections
 
-1. **Learn from proven examples** - Structure inspired by claude-code-cheat-sheet (800+ stars)
-2. **Prioritize official documentation** - Verify against [OpenAI Codex repo](https://github.com/openai/codex)
-3. **Guide to official sources** - Include links, "See official docs" notes
+| To understand... | Read |
+|---|---|
+| The sheet: levels, commands, examples | `README.md` |
+| On-disk skills and how to invoke them | `skills/` |
+| Contribution flow and standards | `CONTRIBUTING.md` |
+| Official Codex truth | [developers.openai.com/codex](https://developers.openai.com/codex) |
+| Security gate behavior | `.github/workflows/security-scan.yml` |
 
-## Content Guidelines
+Lost in the woods? Start with `README.md` for *what the sheet covers*, then
+`CONTRIBUTING.md` for *how changes land*.
 
-### Include
+## Branch Strategy
 
-- Frequently used commands
-- Quick reference tables
-- Practical real-world examples
-- Configuration patterns for common problems
+- `develop` is the default base for PRs and the integration branch.
+- Every change traces: topic branch off `develop`, merge into `develop`,
+  then merge `develop` into `main`.
+- Never open a PR directly from a topic branch to `main`. This keeps
+  `develop` as the integration branch and makes contribution easy to follow.
 
-### Avoid
+## CI
 
-- Long explanatory prose
-- Redundant information
-- Speculative features without documentation
-- Overly complex examples
-- Excessive emojis
+- Security scan runs on pushes and PRs against `main` and `develop`
+  (org-level reusable workflow); gate failures block merges.
 
-## Documentation Style
+## Rules
 
-- Use `<details>` tags for scannable content
-- Minimize emojis - use sparingly for structure, not decoration
-- Clear descriptive headers over clever titles
-- Generous code blocks with clear comments
-- Focused, single-purpose sections
+- Accuracy first: verify commands against the official Codex docs
+  (`developers.openai.com/codex`) and the CLI (`codex --help`); test that
+  examples work and cite sources.
+- Keep it a reference, not a tutorial: tables, `<details>` sections, and
+  code blocks over prose; no speculative features without documentation.
+- Minimal emojis - structure, not decoration; clear descriptive headers over
+  clever titles.
+- One change per commit; stop and explain before major restructuring; do not
+  bundle unrelated work into the same commit.
 
-## Contributing
+## Design Principles
 
-1. Verify accuracy against official Codex docs
-2. Test commands ensure examples work
-3. Keep concise - link to official docs for depth
-4. Match existing organization and style
-5. Cite sources
-
-## Working Rules
-
-- Stop and explain before major architectural changes
-- One change per commit, commit before starting next
-- Do not bundle unrelated work into the same commit
-- **Branch flow (canonical):** All changes go through `develop`. Branch a topic branch off `develop`, make the change, merge the topic branch into `develop`, then merge `develop` into `main`. Never open a PR directly from a topic branch to `main`. This keeps `develop` as the integration branch and makes contribution easy to demonstrate and follow.
+- **POLA** - behavior must not astonish: accurate flags, cited sources, no
+  invented commands.
+- **DRY** - the README is the single source of truth; for depth, link to
+  official docs instead of restating them.
+- **KISS** - a scannable reference beats exhaustive prose; when in doubt,
+  delete a section before adding one.
+- **DIP** - depend on the official documentation contract, never on
+  hearsay; this sheet is a guide to sources, not a replacement for them.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
@@ -96,5 +105,3 @@ This project is indexed by GitNexus as **codex-cheat-sheet** (175 symbols, 172 r
 | Index, status, clean, wiki CLI commands | `.claude/skills/gitnexus/gitnexus-cli/SKILL.md` |
 
 <!-- gitnexus:end -->
-- One change per commit, commit before starting next
-- Do not bundle unrelated work into the same commit
