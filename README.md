@@ -1,3 +1,5 @@
+
+
 <div align="center">
 
 # Codex Cheat Sheet
@@ -45,8 +47,6 @@ codex --version
 - **[Level 4: Advanced Features](#level-4-advanced-features)**
 - **[Skills](#skills)** - Native, reusable capabilities
 - **[Level 5: Expert Workflows](#level-5-expert-workflows)**
-- **[Command Reference](#command-reference)**
-- **[Best Practices](#best-practices)**
 
 ## Level 1: Getting Started
 
